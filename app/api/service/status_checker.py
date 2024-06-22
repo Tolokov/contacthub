@@ -12,4 +12,14 @@ async def get_status_application():
 
 @router.get('/check_database', summary='Проверка доступности базы данных', status_code=200)
 async def get_status_database():
-    return unsuccessful_message
+    from app.database.core.engine import engine
+    from sqlalchemy import text
+    async with engine.connect() as conn:
+        res = await conn.execute(text("SELECT * FROM logs")).all()
+        print(f"{res}")
+    if res:
+        return successful_message
+    else:
+        return unsuccessful_message
+
+
