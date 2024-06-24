@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     host: str = '127.0.0.1'
     port: int = 8080
 
-    debug: bool | None = True
+    debug: bool | None = False
     loger: bool | None = False
 
     rootPath: str = f'http://{host}:{port}/'
