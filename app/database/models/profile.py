@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -13,9 +15,9 @@ class Profile(BaseModel):
 
 class ContactProfile(BaseModel):
     __tablename__ = 'contact_profile'
-    __doc__ = 'Contact information'
+    __doc__ = 'Contact information for search and filter'
 
-    profile: Mapped[int] = mapped_column(ForeignKey("parent_table.id"))
+    profile: Mapped[int] = mapped_column(ForeignKey("profile.id"))
     inn: str
     orgn: str
     city: str
@@ -23,16 +25,19 @@ class ContactProfile(BaseModel):
     zip: str
     address: str
     phone: str
+    date_update: datetime = mapped_column(comment="Date of creation")
 
 
 class TextProfile(BaseModel):
-    __tablename__ = 'text'
-    __doc__ = 'Not important model'
+    __tablename__ = 'text_profile'
+    __doc__ = 'Not important model, maby lazy load'
 
-    profile: Mapped[int] = mapped_column(ForeignKey("parent_table.id"))
+    profile: Mapped[int] = mapped_column(ForeignKey("profile.id"))
     description: str
     full_address: str
     full_title: str
+    date_created: datetime = mapped_column(comment="Date of creation")
+
 
 
 
