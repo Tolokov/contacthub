@@ -6,19 +6,20 @@ from sqlalchemy.orm import Mapped, mapped_column
 from app.database.core.base import BaseModel
 
 
-class Source(BaseModel):
-    __tablename__ = 'source'
+class Resource(BaseModel):
+    __tablename__ = 'resource'
     __doc__ = 'Описание сайте, с которого взята информация о компании, для статистики'
+    # __allow_unmapped__ = True
 
-    name: Optional[Mapped[str]]
-    link: Optional[Mapped[str]]
-    icon: Optional[Mapped[str]]
-    format_icon: Optional[Mapped[str]]
-    description: Optional[Mapped[str]]
+    name: Mapped[Optional[str]]
+    link: Mapped[Optional[str]]
+    icon: Mapped[Optional[str]]
+    format_icon: Mapped[Optional[str]]
+    description: Mapped[Optional[str]]
 
     date_update: Mapped[datetime] = mapped_column(comment="Date of update", default=datetime.now())
     date_created: Mapped[datetime] = mapped_column(comment="Date of created", default=datetime.now())
 
-    user_auth: Optional[Mapped[str]]
-    user_login: Optional[Mapped[str]]
-    user_data: Optional[Mapped[str]]
+    user_auth: Mapped[Optional[str]]
+    user_login: Mapped[Optional[str]]
+    user_data: Mapped[Optional[str]]

@@ -3,7 +3,7 @@ from typing import Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-
+from sqlalchemy import String
 from app.database.core.base import BaseModel
 
 
@@ -16,8 +16,8 @@ class Profile(BaseModel):
     и группировать в общую карточку, но лучше пока оставить
     """
 
-    title: Mapped[str] = mapped_column()
-    username: Mapped[str] = mapped_column(default_factory=uuid.uuid4)
+    title: Mapped[str]
+    tag: Mapped[str]
 
 
 class ContactProfile(BaseModel):
