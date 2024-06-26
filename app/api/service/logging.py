@@ -1,19 +1,19 @@
 from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.database.core.engine import engine
-
+from fastapi import Depends
+from app.database.core.engine import session
+from app.database.models.logs import Logs
 from fastapi import APIRouter
+from sqlalchemy import select, null
 
 router = APIRouter()
 
 
-@router.get('/log', summary='Отобразить запись из базы данных', status_code=200)
-async def post_add_log():
-    result_list = []
-    async with engine.connect() as conn:
-        result = await conn.execute(text("SELECT * FROM logs"))
-        for row in result:
-            result_list.append(str(row))
-        return {"result": result_list}, 200
+@router.get('/log', summary='Выводит сообщение из таблицы логирования', status_code=200)
+async def get_logs(db: AsyncSession = Depends(session)):
+    logs = await db.scalars(select(Logs).where(Logs.id != null()).order_by(Logs.timestamp))
+    return {"result": logs.all()}, 200
 
 
 @router.post('/log', summary='Добавить запись в базу данных', status_code=200)

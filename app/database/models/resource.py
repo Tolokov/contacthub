@@ -9,7 +9,6 @@ from app.database.core.base import BaseModel
 class Resource(BaseModel):
     __tablename__ = 'resource'
     __doc__ = 'Описание сайте, с которого взята информация о компании, для статистики'
-    # __allow_unmapped__ = True
 
     name: Mapped[Optional[str]]
     link: Mapped[Optional[str]]
