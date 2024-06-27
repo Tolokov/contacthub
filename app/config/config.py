@@ -23,6 +23,7 @@ class Settings(BaseSettings):
 
     secretKey: str = 'hi hackerman 😘'
 
+    # Data Source Name
     @computed_field
     @property
     def db_url(self) -> str:

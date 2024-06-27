@@ -18,3 +18,4 @@ class Token(BaseModel):
 
     log_level: Mapped[Optional[LevelAccess]] = mapped_column(default=LevelAccess.READ)
     token: Mapped[str]
+    expired: Mapped[bool] = mapped_column(default=False)

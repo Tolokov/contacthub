@@ -1,14 +1,13 @@
+from typing import Annotated
 
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from fastapi import Depends
-from app.database.core.engine import session
-from app.database.models.logs import Logs, LoggerLevel, ClientLevel
-from fastapi import APIRouter
-from sqlalchemy import select, null, insert
+from fastapi import Depends, APIRouter
 from pydantic import BaseModel
 
-from typing import Annotated
+from sqlalchemy import select, null, insert
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.database.core.engine import session
+from app.database.models.logs import Logs, LoggerLevel, ClientLevel
 
 router = APIRouter()
 
