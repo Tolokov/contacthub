@@ -1,10 +1,14 @@
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from fastapi import Depends
 from app.database.core.engine import session
-from app.database.models.logs import Logs
+from app.database.models.logs import Logs, LoggerLevel, ClientLevel
 from fastapi import APIRouter
 from sqlalchemy import select, null, insert
+from pydantic import BaseModel
+
+from typing import Annotated
 
 router = APIRouter()
 
@@ -15,17 +19,25 @@ async def get_logs(limit: int = 10, db: AsyncSession = Depends(session)):
     return {"logs": logs.all()}, 200
 
 
-# class LogSchema(BaseModel):
-#     message: str
-#     log_level: LoggerLevel
-#     client_level: ClientLevel
+class LogIn(BaseModel):
+    message: str
+    log_level: LoggerLevel = LoggerLevel.INFO
+    client_level: ClientLevel = ClientLevel.LOCAL
+
+
+def get_params(message: str, log_level: int = 2, client_level: int = 1):
+    return {'log_level': log_level, 'message': message, 'client_level': client_level}
+
 
 @router.post('/log', summary='Добавить запись в базу данных', status_code=200)
-async def post_add_log(message: str, log_level: int = 2, client_level: int = 1, db: AsyncSession = Depends(session)):
+async def post_add_log(
+        params: Annotated[LogIn, Depends(LogIn)],
+        db: AsyncSession = Depends(session)
+) -> {}:
     result = await db.scalar(insert(Logs).values(
-        log_level=log_level,
-        client_level=client_level,
-        message=message
+        log_level=params.log_level,
+        client_level=params.client_level,
+        message=params.message
     ).returning(Logs.id))
     await db.commit()
     return {'id': result}, 200

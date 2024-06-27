@@ -4,20 +4,20 @@ from datetime import datetime
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database.core.base import BaseModel
 
-from enum import IntEnum
+from enum import StrEnum
 
 
-class LoggerLevel(IntEnum):
-    DEBUG = 1
-    INFO = 2
-    WARNING = 3
-    ERROR = 4
-    CRITICAL = 5
+class LoggerLevel(StrEnum):
+    DEBUG = 'DEBUG'
+    INFO = 'INFO'
+    WARNING = 'WARNING'
+    ERROR = 'ERROR'
+    CRITICAL = 'CRITICAL'
 
 
-class ClientLevel(IntEnum):
-    LOCAL = 1
-    PUBLIC = 2
+class ClientLevel(StrEnum):
+    LOCAL = 'LOCAL'
+    PUBLIC = 'PUBLIC'
 
 
 class Logs(BaseModel):
