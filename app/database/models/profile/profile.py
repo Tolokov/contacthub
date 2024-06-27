@@ -19,9 +19,10 @@ class Profile(BaseModel):
     """
     title: Mapped[str] = mapped_column(BigInteger, autoincrement=True, primary_key=True)
     tag: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
+
     contact: Mapped[list["Contact"]] = relationship(back_populates="profile", cascade="all, delete-orphan")
-    # texts: Mapped[list["TextProfile"]] = relationship(back_populates="text_profile", cascade="all, delete-orphan")
-    # sectors: Mapped[list["Sector"]] = relationship(back_populates="sector", cascade="all, delete-orphan")
+    text: Mapped[list["Text"]] = relationship(back_populates="profile", cascade="all, delete-orphan")
+    sector: Mapped[list["Sector"]] = relationship(back_populates="profile", cascade="all, delete-orphan")
 
 
 class Contact(BaseModel):
@@ -48,38 +49,38 @@ class Contact(BaseModel):
     contact: Mapped[Optional[str]]
 
 
-# class TextProfile(BaseModel):
-#     __tablename__ = 'text_profile'
-#     __doc__ = """
-#     Дополнительная информация о компании, очень
-#     не структурированная и обычно может содежать
-#     в себе излишний текст на разных языках
-#     """
-#
-#     profile_id: Mapped[int] = mapped_column(ForeignKey("profile.id"))
-#     profile: Mapped["Profile"] = relationship(back_populates="profile")
-#     # profile: Mapped[int] = mapped_column(ForeignKey("profile.id"), ondelete="CASCADE")
-#
-#     description: Mapped[Optional[str]]
-#     full_address: Mapped[Optional[str]]
-#     full_title: Mapped[Optional[str]]
-#
-#     zip: Mapped[Optional[str]]
-#     head: Mapped[Optional[str]]
-#
-#
-# class Sector(BaseModel):
-#     __tablename__ = 'sector'
-#     __doc__ = """
-#     Индустрия и область в которой работает компания
-#     У компании может быть несколько отраслей.
-#     По идее у компании с одним названием может быть
-#     производство в разных отраслях, но это не так важно
-#     """
-#
-#     profile_id: Mapped[int] = mapped_column(ForeignKey("profile.id"))
-#     profile: Mapped["Profile"] = relationship(back_populates="profile")
-#     name: Mapped[Optional[str]]
+class Text(BaseModel):
+    __tablename__ = 'text'
+    __doc__ = """
+    Дополнительная информация о компании, очень
+    не структурированная и обычно может содежать
+    в себе излишний текст на разных языках
+    """
+
+    profile_id: Mapped[int] = mapped_column(ForeignKey("profile.id"))
+    profile: Mapped["Profile"] = relationship(back_populates="text")
+    # profile: Mapped[int] = mapped_column(ForeignKey("profile.id"), ondelete="CASCADE")
+
+    description: Mapped[Optional[str]]
+    full_address: Mapped[Optional[str]]
+    full_title: Mapped[Optional[str]]
+
+    zip: Mapped[Optional[str]]
+    head: Mapped[Optional[str]]
+
+
+class Sector(BaseModel):
+    __tablename__ = 'sector'
+    __doc__ = """
+    Индустрия и область в которой работает компания
+    У компании может быть несколько отраслей.
+    По идее у компании с одним названием может быть
+    производство в разных отраслях, но это не так важно
+    """
+
+    profile_id: Mapped[int] = mapped_column(ForeignKey("profile.id"))
+    profile: Mapped["Profile"] = relationship(back_populates="sector")
+    name: Mapped[Optional[str]]
 
 
 # class Addition(BaseModel):

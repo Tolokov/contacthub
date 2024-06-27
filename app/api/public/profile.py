@@ -9,7 +9,7 @@ def get_profile():
     :param: profile_id
     :return: list[instance]
     """
-    return NotImplemented
+    return NotImplementedError("Метод не реализован")
 
 
 @router.post("/profile", summary="Добавление информации о компании", status_code=200)
@@ -23,7 +23,7 @@ def post_profile():
     }
     :return: list[instance]
     """
-    return NotImplemented
+    return NotImplementedError("Метод не реализован")
 
 
 @router.patch("/profile", summary="Изменение информации о компании", status_code=200)
@@ -37,7 +37,7 @@ def patch_profile():
         }
     :return: list[id]
     """
-    return NotImplemented
+    return NotImplementedError("Метод не реализован")
 
 
 @router.delete("/profile", summary="Удаление информации о компании", status_code=200)
@@ -46,4 +46,4 @@ def delete_profile():
     :param: profile_id, user_token, 
     :return: 
     """
-    return NotImplemented
+    return NotImplementedError("Метод не реализован")

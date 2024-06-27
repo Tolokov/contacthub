@@ -21,5 +21,3 @@ async def get_status_database():
         return successful_message
     else:
         return unsuccessful_message
-
-

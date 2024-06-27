@@ -11,10 +11,15 @@ from app.database.core.engine import delete_tables, create_tables
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     if settings.debug:
-        await delete_tables()
-        await create_tables()
-        print('=== Таблица очищена ===', end='')
-    print('=== Приолжение перезапущено ===')
+        try:
+            await delete_tables()
+            await create_tables()
+        except ConnectionRefusedError as e:
+            print('=== НЕТ БАЗЫ ДАННЫХ ===', end='')
+        else:
+            print('=== Таблица очищена ===', end='')
+        finally:
+            print('=== Приложение перезапущено ===')
     yield
 
 

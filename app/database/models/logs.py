@@ -15,10 +15,16 @@ class LoggerLevel(IntEnum):
     CRITICAL = 5
 
 
+class ClientLevel(IntEnum):
+    LOCAL = 1
+    PUBLIC = 2
+
+
 class Logs(BaseModel):
     __tablename__ = 'logs'
     __doc__ = 'Logs table'
 
     log_level: Mapped[Optional[LoggerLevel]] = mapped_column(default=LoggerLevel.INFO)
     message: Mapped[Optional[str]]
-    timestamp: Mapped[Optional[datetime]]
+    timestamp: Mapped[Optional[datetime]] = mapped_column(default=datetime.now())
+    client_level: Mapped[Optional[ClientLevel]] = mapped_column(default=ClientLevel.LOCAL)
