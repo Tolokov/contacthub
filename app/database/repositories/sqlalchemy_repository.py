@@ -1,6 +1,9 @@
 from app.database.core.base import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database.repositories.base import BaseRepository
+from typing import Generic, TypeVar
+from sqlalchemy import select
+
 
 TModel = TypeVar('TModel', bound=BaseModel)
 
@@ -14,21 +17,30 @@ class SqlalchemyRepository(BaseRepository, Generic[TModel]):
     # async def get(self, *args, **kwargs):
     #     """Получить что-либо по идентификатору"""
     #     return await ''
+    # def _get_select_query(self, lazy: bool = True) -> Select:
+    #     query = select(self.model).order_by(getattr(self.model, 'id'))
+    #     if hasattr(self.model, 'deleted'):
+    #         query = query.filter(getattr(self.model, 'deleted') == false())
+    #     if lazy:
+    #         query = query.options(raiseload('*'))
+    #     return query
+
 
     async def get(self, item_id: int, lazy: bool = False) -> TModel:
-        query = self._get_select_query(lazy).filter(getattr(self.model, 'id') == item_id)
-
+        query = select(self.model).filter(getattr(self.model, 'id') == item_id).order_by(getattr(self.model, 'id'))
+        # if lazy:
+        #     query = query.options(raiseload('*'))
         instance = await self.session.scalar(query)
 
         return instance
 
-    async def create(self, *args, **kwargs):
-        """Создать новую запись в бд"""
-        return await ''
-
-    async def delete(self, *args, **kwargs):
-        """Удалить запсись из БД"""
-        return await ''
+    # async def create(self, *args, **kwargs):
+    #     """Создать новую запись в бд"""
+    #     return await ''
+    #
+    # async def delete(self, *args, **kwargs):
+    #     """Удалить запсись из БД"""
+    #     return await ''
 
 
     # def __init__(self, session: AsyncSession):

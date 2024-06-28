@@ -1,7 +1,11 @@
 from app.database.core.base import BaseModel
+from typing import Generic, TypeVar
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.services.base import BaseService
+from app.lib.exceptions import DoesNotExist
 
+from app.database.repositories.sqlalchemy_repository import ModelRepository
 TModel = TypeVar('TModel', bound=BaseModel)
 
 
@@ -20,14 +24,14 @@ class SqlalchemyService(BaseService, Generic[TModel]):
             raise DoesNotExist()
         return instance
 
-    async def get_list(self):
-        return await ''
-
-    async def create(self):
-        return await ''
-
-    async def update(self):
-        return await ''
-
-    async def delete(self):
-        return await ''
+    # async def get_list(self):
+    #     return await ''
+    #
+    # async def create(self):
+    #     return await ''
+    #
+    # async def update(self):
+    #     return await ''
+    #
+    # async def delete(self):
+    #     return await ''

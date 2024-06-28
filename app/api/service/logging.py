@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.core.engine import session
 from app.database.models.logs import Logs, LoggerLevel, ClientLevel
-from app.database.service.sqlalchemy_service import SqlalchemyService
+from app.database.services.sqlalchemy_service import SqlalchemyService
 from app.database.repositories.sqlalchemy_repository import SqlalchemyRepository
 
 from app.lib.exceptions import DoesNotExist

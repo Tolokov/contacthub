@@ -12,8 +12,9 @@ from app.database.core.engine import delete_tables, create_tables
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     if settings.debug:
         try:
-            await delete_tables()
-            await create_tables()
+            # await delete_tables()
+            # await create_tables()
+            pass
         except ConnectionRefusedError as e:
             print('=== НЕТ БАЗЫ ДАННЫХ ===', end='')
         else:
