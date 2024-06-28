@@ -14,7 +14,7 @@ async def get_status_application():
 
 @router.get('/check_database', summary='Проверка доступности базы данных', status_code=200)
 async def get_status_database(db: AsyncSession = Depends(session)):
-    if db.connection():
+    if await db.connection():
         return successful_message
     else:
         return unsuccessful_message
