@@ -14,6 +14,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         try:
             # await delete_tables()
             # await create_tables()
+            # Заполнение базы данными
             pass
         except ConnectionRefusedError as e:
             print('=== НЕТ БАЗЫ ДАННЫХ ===', end='')
