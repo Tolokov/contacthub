@@ -18,6 +18,7 @@ TABLES = (
     Token
 )
 
+
 async def create_tables():
     # https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html#synopsis-core
     async with engine.begin() as conn:
@@ -29,12 +30,6 @@ async def delete_tables():
     async with engine.begin() as conn:
         for table in TABLES:
             await conn.run_sync(table.metadata.drop_all)
-
-
-# async def fill_tables():
-#     async with engine.begin() as conn:
-#         for table in TABLES:
-#             await conn.run_sync(await table.fill_random_data(self))
 
 
 async def session() -> AsyncSession:

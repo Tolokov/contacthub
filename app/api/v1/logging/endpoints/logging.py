@@ -37,12 +37,12 @@ async def get_log(
 )
 async def post_add_log(
         params: Annotated[LogIn, Depends(LogIn)],
-        db: AsyncSession = Depends(session)
+        session: AsyncSession = Depends(session)
 ) -> LogInResponse:
-    result = await db.scalar(insert(Logs).values(
+    result = await session.scalar(insert(Logs).values(
         log_level=params.log_level,
         client_level=params.client_level,
         message=params.message
     ).returning(Logs.id))
-    await db.commit()
+    await session.commit()
     return {'id': result}
