@@ -16,6 +16,6 @@ class Token(BaseModel):
     __tablename__ = 'token'
     __doc__ = 'authorization tokens'
 
-    log_level: Mapped[Optional[LevelAccess]] = mapped_column(default=LevelAccess.READ)
+    AccessLevel: Mapped[Optional[LevelAccess]] = mapped_column(default=LevelAccess.READ)
     token: Mapped[str]
     expired: Mapped[bool] = mapped_column(default=False)

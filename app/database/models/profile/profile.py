@@ -83,7 +83,6 @@ class Sector(BaseModel):
     profile: Mapped["Profile"] = relationship(back_populates="sector")
     name: Mapped[Optional[str]]
 
-
 # class Addition(BaseModel):
 #     __tablename__ = 'addition'
 #     __doc__ = 'Addition table if other table need more datas'

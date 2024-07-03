@@ -1,21 +1,26 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 
-from app.config.config import settings
+from app.config.setting import settings
 
 from app.database.models.logs import Logs
 from app.database.models.token import Token
 from app.database.models.resource import Resource
 from app.database.models.profile.profile import Profile
+from app.database.models.profile.city import City, District
 
 engine = create_async_engine(url=settings.db_url)
 
-session_maker = async_sessionmaker(bind=engine, expire_on_commit=False, class_=AsyncSession)
+session_maker = async_sessionmaker(
+    bind=engine, class_=AsyncSession,
+    expire_on_commit=False, autoflush=True, autocommit=False
+)
 
 TABLES = (
     Logs,
     Resource,
     Profile,
-    Token
+    Token,
+    District
 )
 
 

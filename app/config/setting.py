@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     title: str = 'ContactHub'
-    version: str = '0.1c'
+    version: str = '0.2c'
 
     host: str = '127.0.0.1'
     port: int = 8080
