@@ -2,11 +2,10 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 
 from app.config.setting import settings
 
-from app.database.models.logs import Logs
-from app.database.models.token import Token
-from app.database.models.resource import Resource
-from app.database.models.profile.profile import Profile
-from app.database.models.profile.city import City, District
+from app.database.models import logs, token, resource
+from app.database.models.profile import city, profile, raw_profile
+
+from app.lib.tests import fill_database_testing_datas
 
 engine = create_async_engine(url=settings.db_url)
 
@@ -16,11 +15,14 @@ session_maker = async_sessionmaker(
 )
 
 TABLES = (
-    Logs,
-    Resource,
-    Profile,
-    Token,
-    District
+    logs.Logs,
+    resource.Resource,
+    token.Token,
+
+    city.District, city.City,
+    profile.Profile, profile.Contact, profile.Sector, profile.Text,
+
+    raw_profile.Raw
 )
 
 
@@ -35,6 +37,13 @@ async def delete_tables():
     async with engine.begin() as conn:
         for table in TABLES:
             await conn.run_sync(table.metadata.drop_all)
+
+
+async def fill_tables(count_testing_rows=10):
+    async with engine.begin() as conn:
+        for table in TABLES:
+            for i in range(count_testing_rows):
+                await fill_database_testing_datas(table, conn)
 
 
 async def session() -> AsyncSession:

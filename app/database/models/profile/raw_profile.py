@@ -18,4 +18,4 @@ class Raw(BaseModel):
     """
     raw_data: Mapped[Optional[str]] = mapped_column(Text)
     parsed_data: Mapped[Optional[JSON]] = mapped_column(type_=JSON, nullable=False)
-    coding: Mapped[Optional[str]] = mapped_column(String(20))
+    coding: Mapped[Optional[str]] = mapped_column(String(40))

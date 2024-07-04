@@ -5,16 +5,16 @@ from fastapi import FastAPI
 
 from app.api.router import router as api_router
 from app.config.setting import settings
+from app.database.core.engine import delete_tables, create_tables, fill_tables
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     if settings.debug:
         try:
-            from app.database.core.engine import delete_tables, create_tables
-            # await delete_tables()
-            # await create_tables()
-            pass
+            await delete_tables()
+            await create_tables()
+            await fill_tables()
         except ConnectionRefusedError as e:
             print('=== НЕТ БАЗЫ ДАННЫХ ===', end='')
         else:

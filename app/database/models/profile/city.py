@@ -8,9 +8,9 @@ class District(BaseModel):
     __tablename__ = 'district'
     __doc__ = """Регионы"""
 
-    contact: Mapped[list["City"]] = relationship(back_populates="profile", cascade="save-update")
-    district_number: Mapped[int]
-    district_name: Mapped[str]
+    number: Mapped[int]
+    name: Mapped[str]
+    city: Mapped[list["City"]] = relationship(back_populates="district", cascade="save-update")
 
 
 class City(BaseModel):
@@ -19,3 +19,4 @@ class City(BaseModel):
 
     city_name: Mapped[str]
     district_id: Mapped[int] = mapped_column(ForeignKey('district.id'), primary_key=True)
+    district: Mapped["District"] = relationship(back_populates="city")

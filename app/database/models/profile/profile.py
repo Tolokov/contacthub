@@ -17,8 +17,8 @@ class Profile(BaseModel):
     
     Эту информацию мы будем выводить на главной
     """
-    title: Mapped[str] = mapped_column(BigInteger, primary_key=True)
-    tag: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
+    title: Mapped[str] = mapped_column(primary_key=True)
+    tag: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, nullable=True)
     deleted: Mapped[bool] = mapped_column(default=False)
 
     contact: Mapped[list["Contact"]] = relationship(back_populates="profile", cascade="all, delete-orphan")
