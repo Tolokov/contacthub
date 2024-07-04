@@ -17,7 +17,7 @@ class Profile(BaseModel):
     
     Эту информацию мы будем выводить на главной
     """
-    title: Mapped[str] = mapped_column(BigInteger, autoincrement=True, primary_key=True)
+    title: Mapped[str] = mapped_column(BigInteger, primary_key=True)
     tag: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
     deleted: Mapped[bool] = mapped_column(default=False)
 
