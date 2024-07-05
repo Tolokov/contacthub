@@ -12,7 +12,7 @@ COUNT_TESTING_ROWS = 10
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-    if settings.debug:
+    if settings.dropDb:
         print('=== Lifespan ===')
         try:
             await delete_tables()

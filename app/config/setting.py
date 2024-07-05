@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     port: int = 8080
 
     debug: bool | None = True
+    dropDb: bool | None = True
     loger: bool | None = False
 
     rootPath: str = f'http://{host}:{port}/'
