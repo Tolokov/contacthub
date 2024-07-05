@@ -16,6 +16,10 @@ anyio==4.4.0
     #   watchfiles
 asyncpg==0.29.0
     # via -r requirements.in
+build==1.2.1
+    # via
+    #   -r requirements.in
+    #   pip-tools
 certifi==2024.6.2
     # via
     #   -r requirements.in
@@ -24,11 +28,13 @@ certifi==2024.6.2
 click==8.1.7
     # via
     #   -r requirements.in
+    #   pip-tools
     #   typer
     #   uvicorn
 colorama==0.4.6
     # via
     #   -r requirements.in
+    #   build
     #   click
     #   uvicorn
 dnspython==2.6.1
@@ -40,11 +46,15 @@ email-validator==2.2.0
     #   -r requirements.in
     #   fastapi
 fastapi==0.111.0
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   fastapi-filter
 fastapi-cli==0.0.4
     # via
     #   -r requirements.in
     #   fastapi
+fastapi-filter==2.0.0
+    # via -r requirements.in
 greenlet==3.0.3
     # via
     #   -r requirements.in
@@ -94,10 +104,17 @@ orjson==3.10.5
     # via
     #   -r requirements.in
     #   fastapi
+packaging==24.1
+    # via
+    #   -r requirements.in
+    #   build
+pip-tools==7.4.1
+    # via -r requirements.in
 pydantic==2.7.4
     # via
     #   -r requirements.in
     #   fastapi
+    #   fastapi-filter
     #   pydantic-extra-types
     #   pydantic-settings
 pydantic-core==2.18.4
@@ -112,6 +129,11 @@ pygments==2.18.0
     # via
     #   -r requirements.in
     #   rich
+pyproject-hooks==1.1.0
+    # via
+    #   -r requirements.in
+    #   build
+    #   pip-tools
 python-dotenv==1.0.1
     # via
     #   -r requirements.in
@@ -172,3 +194,11 @@ websockets==12.0
     # via
     #   -r requirements.in
     #   uvicorn
+wheel==0.43.0
+    # via
+    #   -r requirements.in
+    #   pip-tools
+
+# The following packages are considered to be unsafe in a requirements file:
+# pip
+# setuptools
