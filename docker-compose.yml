@@ -17,4 +17,5 @@ services:
     image: redis:7.4-rc2-alpine
     container_name: redis-ch
     restart: always
-
+    ports:
+      - 6379:6379
