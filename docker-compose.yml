@@ -16,3 +16,5 @@ services:
   redis:
     image: redis:7.4-rc2-alpine
     container_name: redis-ch
+    restart: always
+
